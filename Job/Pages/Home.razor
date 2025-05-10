@@ -1,0 +1,150 @@
+﻿@page "/"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<!-- Hero Section -->
+<section class="hero bg-primary text-white py-5">
+    <div class="container text-center">
+        <h1 class="display-4 mb-3">Welcome to the Job Portal</h1>
+        <p class="lead mb-4">Your gateway to finding great jobs and talent. Connect with opportunities and potential today!</p>
+        <div>
+            <a class="btn btn-light btn-lg mx-2" href="/jobs" role="button">Browse Jobs</a>
+            <a class="btn btn-outline-light btn-lg mx-2" href="/post-job" role="button">Post a Job</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Job Seeker Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Looking for a Job?</h5>
+                        <p class="card-text">Explore hundreds of exciting job listings tailored to your skills and interests. Your dream job is just a click away!</p>
+                        <a href="/jobs" class="btn btn-primary btn-lg">Browse Jobs</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employer Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Looking to Hire?</h5>
+                        <p class="card-text">Post your job openings and connect with top talent. Find the best candidates who are ready to contribute to your success.</p>
+                        <a href="/post-job" class="btn btn-success btn-lg">Post a Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works bg-light py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">How It Works</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">1. Sign Up</h5>
+                        <p class="card-text">Create your account and build your profile. Job seekers and employers can join and start using the portal immediately.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">2. Search or Post</h5>
+                        <p class="card-text">Job seekers can search for their next role, and employers can post jobs for potential candidates to find.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">3. Apply or Hire</h5>
+                        <p class="card-text">Job seekers can apply for jobs, and employers can review applications and make hiring decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="footer bg-dark text-white py-5 text-center">
+    <div class="container">
+        <!-- Logo or Company Name -->
+        <div class="mb-3">
+            <h4 class="font-weight-bold">Job Portal</h4>
+            <p>Your go-to platform for finding jobs and talent</p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <h5 class="font-weight-bold">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/jobs" class="text-white">Browse Jobs</a></li>
+                    <li><a href="/post-job" class="text-white">Post a Job</a></li>
+                    <li><a href="/login" class="text-white">Login</a></li>
+                    <li><a href="/register" class="text-white">Register</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5 class="font-weight-bold">Company</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/about-us" class="text-white">About Us</a></li>
+                    <li><a href="/contact" class="text-white">Contact</a></li>
+                    <li><a href="/privacy-policy" class="text-white">Privacy Policy</a></li>
+                    <li><a href="/terms" class="text-white">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5 class="font-weight-bold">Contact Us</h5>
+                <p class="text-white">123 Job Street, Suite 100<br>City, Country</p>
+                <p class="text-white">Phone: (123) 456-7890</p>
+                <p class="text-white">Email: support@jobportal.com</p>
+            </div>
+            <div class="col-md-3">
+                <h5 class="font-weight-bold">Follow Us</h5>
+                <div class="social-icons">
+                    <a href="https://facebook.com" class="text-white mr-3"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" class="text-white mr-3"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com" class="text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Copyright Section -->
+        <div class="mt-4">
+            <p class="mb-0">&copy; 2025 Job Portal | All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Add FontAwesome for social icons (for the icons to display correctly) -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+
+
+
+

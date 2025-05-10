@@ -1,0 +1,65 @@
+﻿@page "/job-details/{JobId:int}"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Job Details</h3>
+
+@if (IsLoading)
+{
+    <div class="text-muted">Loading job details...</div>
+}
+else if (Job == null)
+{
+    <div class="alert alert-danger">Job not found.</div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">@Job.Title</h4>
+            <h6 class="text-muted">@Job.CompanyName – @Job.Location</h6>
+            <p class="card-text mt-3">@Job.Description</p>
+            <button class="btn btn-success mt-3" @onclick="ApplyToJob">Apply</button>
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(Message))
+    {
+        <div class="alert alert-info mt-3">@Message</div>
+    }
+}
+
+@code {
+    [Parameter] public int JobId { get; set; }
+    JobModel Job;
+    string Message = string.Empty;
+    bool IsLoading = true;
+
+    protected override void OnInitialized()
+    {
+        LoadJob();
+    }
+
+    void LoadJob()
+    {
+        // TODO: Replace with EF Core logic, e.g.:
+        // Job = dbContext.Jobs.FirstOrDefault(j => j.Id == JobId);
+
+        // Simulate loading
+        Job = new JobModel
+            {
+                Id = JobId,
+                Title = "Sample Job Title",
+                Description = "This is a placeholder job description.",
+                CompanyName = "Example Corp",
+                Location = "New York"
+            };
+
+        IsLoading = false;
+    }
+
+    void ApplyToJob()
+    {
+        // TODO: Save job application using EF Core
+        Message = "Your application has been submitted.";
+    }
+}

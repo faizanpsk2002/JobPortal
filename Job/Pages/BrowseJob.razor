@@ -1,0 +1,35 @@
+﻿@page "/jobs"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Available Jobs</h3>
+
+@if (Jobs == null || !Jobs.Any())
+{
+    <div class="alert alert-info">No jobs available at the moment.</div>
+}
+else
+{
+    @foreach (var job in Jobs)
+    {
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">@job.Title</h5>
+                <p class="card-text">@job.CompanyName - @job.Location</p>
+                <p class="card-text text-muted">@job.Description?.Substring(0, Math.Min(100, job.Description.Length))...</p>
+                <a class="btn btn-outline-primary btn-sm" href="/job-details/@job.Id">View Details</a>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    List<JobModel> Jobs = new();
+
+    protected override void OnInitialized()
+    {
+        // TODO: Load jobs from database (EF Core)
+        // Example:
+        // Jobs = dbContext.Jobs.ToList();
+    }
+}

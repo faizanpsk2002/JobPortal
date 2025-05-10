@@ -1,0 +1,57 @@
+﻿@page "/register"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Create an Account</h3>
+
+<div class="card shadow-sm p-4" style="max-width: 400px;">
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input class="form-control" placeholder="John Doe" @bind="FullName" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="example@email.com" @bind="Email" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password" @bind="Password" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Role</label>
+        <select class="form-select" @bind="Role">
+            <option value="JobSeeker">Job Seeker</option>
+            <option value="Employer">Employer</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary w-100" @onclick="RegisterUser">Register</button>
+</div>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-info mt-3">@Message</div>
+}
+
+@code {
+    string FullName, Email, Password, Role = "JobSeeker";
+    string Message;
+
+    void RegisterUser()
+    {
+        // Simple validation (for demo purposes)
+        if (string.IsNullOrWhiteSpace(FullName) || string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+        {
+            Message = "Please fill in all fields.";
+            return;
+        }
+
+        // Here you can save the user to the database (EF Core logic)
+        // After successful registration:
+        Message = "Registration successful!";
+        // Optionally redirect: Navigation.NavigateTo("/login");
+    }
+}

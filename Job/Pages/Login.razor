@@ -1,0 +1,50 @@
+﻿@page "/login"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Login to Your Account</h3>
+
+<div class="card shadow-sm p-4" style="max-width: 400px;">
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="you@example.com" @bind="Email" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password" @bind="Password" />
+    </div>
+
+    <button class="btn btn-primary w-100" @onclick="LoginUser">Login</button>
+</div>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-danger mt-3">@Message</div>
+}
+
+@code {
+    string Email = string.Empty;
+    string Password = string.Empty;
+    string Message = string.Empty;
+
+    void LoginUser()
+    {
+        if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+        {
+            Message = "Please enter both email and password.";
+            return;
+        }
+
+        // TODO: Replace this with actual authentication logic using EF Core
+        if (Email == "admin@example.com" && Password == "admin")
+        {
+            Message = "";
+            Navigation.NavigateTo("/"); // redirect to homepage or dashboard
+        }
+        else
+        {
+            Message = "Invalid email or password.";
+        }
+    }
+}

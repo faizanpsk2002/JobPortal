@@ -1,0 +1,36 @@
+﻿@page "/my-applications"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">My Job Applications</h3>
+
+@if (Applications == null || !Applications.Any())
+{
+    <div class="alert alert-info">You haven't applied for any jobs yet.</div>
+}
+else
+{
+    @foreach (var application in Applications)
+    {
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">@application.Job?.Title</h5>
+                <p class="card-text">@application.Job?.CompanyName - @application.Job?.Location</p>
+                <p class="card-text"><small class="text-muted">Applied on @application.AppliedOn.ToShortDateString()</small></p>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    List<Application> Applications = new();
+
+    protected override void OnInitialized()
+    {
+        // TODO: Replace with actual EF Core data loading logic
+        // Applications = db.JobApplications
+        //     .Include(a => a.Job)
+        //     .Where(a => a.UserId == currentUserId)
+        //     .ToList();
+    }
+}

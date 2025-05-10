@@ -1,0 +1,52 @@
+﻿@page "/my-jobs"
+@using Job.Models
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Jobs I Posted</h3>
+
+@if (IsLoading)
+{
+    <div class="text-muted">Loading your posted jobs...</div>
+}
+else if (EmployerJobs == null || !EmployerJobs.Any())
+{
+    <div class="alert alert-info">You have not posted any jobs yet.</div>
+}
+else
+{
+    @foreach (var job in EmployerJobs)
+    {
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">@job.Title</h5>
+                <p class="card-text">@job.Description</p>
+                <p class="card-text text-muted">@job.CompanyName – @job.Location</p>
+                <a class="btn btn-outline-primary btn-sm" href="/job-details/@job.Id">View Details</a>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    List<JobModel> EmployerJobs = new();
+    bool IsLoading = true;
+
+    protected override void OnInitialized()
+    {
+        LoadEmployerJobs();
+    }
+
+    void LoadEmployerJobs()
+    {
+        // Simulate loading jobs. Replace this with EF Core data fetch
+        EmployerJobs = new List<JobModel>
+        {
+            new JobModel { Id = 1, Title = "Software Engineer", Description = "Develop software solutions", CompanyName = "TechCorp", Location = "San Francisco" },
+            new JobModel { Id = 2, Title = "Product Manager", Description = "Lead product development", CompanyName = "Innovate Inc.", Location = "New York" },
+            new JobModel { Id = 3, Title = "DotNet Developer", Description = "Development", CompanyName = "Shariz Tech", Location = "Mh" }
+
+        };
+
+        IsLoading = false;
+    }
+}

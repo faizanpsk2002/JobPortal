@@ -1,0 +1,44 @@
+﻿@page "/notifications"
+@using Job.Models
+@inject INotificationService NotificationService
+
+<h3>Notifications</h3>
+
+@if (notificationList == null || !notificationList.Any())
+{
+    <p>No notifications available.</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var notification in notificationList)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>@notification.Title</strong>
+                    <p class="mb-1">@notification.Message</p>
+                    <small class="text-muted">@notification.CreatedAt?.ToString("g")</small>
+                </div>
+                @if (!notification.IsRead)
+                {
+                    <button class="btn btn-sm btn-outline-primary" @onclick="() => MarkAsRead(notification.Id)">Mark as read</button>
+                }
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private List<NotificationModel> notificationList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        notificationList = await NotificationService.GetNotificationsAsync();
+    }
+
+    private async Task MarkAsRead(int id)
+    {
+        await NotificationService.MarkAsReadAsync(id);
+        notificationList = await NotificationService.GetNotificationsAsync();
+    }
+}

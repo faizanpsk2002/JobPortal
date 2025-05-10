@@ -1,0 +1,55 @@
+﻿@page "/post-job"
+@inject NavigationManager Navigation
+
+<h3 class="mb-4">Post a New Job</h3>
+
+<div class="card shadow-sm p-4" style="max-width: 500px;">
+    <div class="mb-3">
+        <label class="form-label">Job Title</label>
+        <input class="form-control" placeholder="e.g. Software Engineer" @bind="Title" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" placeholder="Job description..." @bind="Description"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Company Name</label>
+        <input class="form-control" placeholder="e.g. ABC Tech Ltd." @bind="CompanyName" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input class="form-control" placeholder="e.g. New York" @bind="Location" />
+    </div>
+
+    <button class="btn btn-success w-100" @onclick="SubmitJob">Post Job</button>
+</div>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-info mt-3">@Message</div>
+}
+
+@code {
+    string Title = "";
+    string Description = "";
+    string CompanyName = "";
+    string Location = "";
+    string Message = "";
+
+    void SubmitJob()
+    {
+        if (string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Description) ||
+            string.IsNullOrWhiteSpace(CompanyName) || string.IsNullOrWhiteSpace(Location))
+        {
+            Message = "Please fill in all fields.";
+            return;
+        }
+
+        // TODO: Save job to database (EF Core)
+        Message = "Job posted successfully!";
+        // Optionally redirect: Navigation.NavigateTo("/my-jobs");
+    }
+}
