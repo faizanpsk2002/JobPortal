@@ -1,21 +1,24 @@
 ﻿@page "/login"
-@using Job.Models
+@using System.Net.Http.Json
 @inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
 
 <h3 class="mb-4">Login to Your Account</h3>
 
 <div class="card shadow-sm p-4" style="max-width: 400px;">
-    <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" placeholder="you@example.com" @bind="Email" />
-    </div>
+    <EditForm Model="@user" OnValidSubmit="HandleLogin">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <InputText class="form-control" placeholder="you@example.com" @bind-Value="user.Username" />
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" class="form-control" placeholder="Enter password" @bind="Password" />
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <InputText type="password" class="form-control" placeholder="Enter password" @bind-Value="user.Password" />
+        </div>
 
-    <button class="btn btn-primary w-100" @onclick="LoginUser">Login</button>
+        <button  class="btn btn-primary w-100" type="submit">Login</button>
+    </EditForm>
 </div>
 
 @if (!string.IsNullOrEmpty(Message))
@@ -24,27 +27,44 @@
 }
 
 @code {
-    string Email = string.Empty;
-    string Password = string.Empty;
-    string Message = string.Empty;
+    private UserDto user = new();
+    private string Message;
 
-    void LoginUser()
+    private async Task HandleLogin()
     {
-        if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
-        {
-            Message = "Please enter both email and password.";
-            return;
-        }
+        var client = ClientFactory.CreateClient("JobPortalAPI");
 
-        // TODO: Replace this with actual authentication logic using EF Core
-        if (Email == "admin@example.com" && Password == "admin")
+        try
         {
-            Message = "";
-            Navigation.NavigateTo("/"); // redirect to homepage or dashboard
+            var response = await client.PostAsJsonAsync("https://localhost:7253/api/auth/login", user);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<LoginResult>();
+                Message = $"Welcome, {result.Username}!";
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                Message = "Invalid email or password.";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Message = "Invalid email or password.";
+            Message = "Error connecting to the server: " + ex.Message;
         }
+    }
+
+    public class UserDto
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class LoginResult
+    {
+        public string Message { get; set; }
+        public string Username { get; set; }
+        public string Role { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using Job.Models
 @inject NavigationManager Navigation
+@inject IHttpClientFactory ClientFactory
 
 <!-- Hero Section -->
 <section class="hero bg-primary text-white py-5">
@@ -79,14 +80,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <!-- Footer -->
 <footer class="footer bg-dark text-white py-5 text-center">
     <div class="container">
@@ -143,6 +136,7 @@
 
 <!-- Add FontAwesome for social icons (for the icons to display correctly) -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
 
 
 

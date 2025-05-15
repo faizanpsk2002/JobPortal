@@ -13,10 +13,14 @@ builder.Services.AddAuthentication("Cookies")
     .AddCookie("Cookies", options =>
     {
         options.LoginPath = "/login";
-        options.LogoutPath = "/logout";
+        options.LogoutPath = "/logout"; 
     });
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
+builder.Services.AddHttpClient("API", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7253/"); // API's URL
+});
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
